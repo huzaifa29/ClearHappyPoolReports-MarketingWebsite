@@ -24,7 +24,7 @@
 /* Logo */
 .logo {
   flex-shrink: 0;
-  height: 50px;
+  height: 62px;
   width: auto;
   object-fit: contain;
   cursor: pointer;
@@ -175,6 +175,6 @@
 
 @media (max-width: 480px) {
   .logo {
-    height: 42px;
+    height: 52px;
   }
 }
