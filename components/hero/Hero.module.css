@@ -38,7 +38,7 @@
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: var(--space-16);
   align-items: center;
   position: relative;
@@ -184,6 +184,7 @@
    ============================================= */
 .imageWrap {
   position: relative;
+  width: 120%;          /* 20% wider than the grid cell */
   opacity: 0;
   transform: translateX(40px);
   transition: opacity 0.8s ease 0.18s, transform 0.8s ease 0.18s;
