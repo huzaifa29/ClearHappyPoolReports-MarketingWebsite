@@ -1,0 +1,220 @@
+/* =============================================
+   FEATURES SECTION
+   ============================================= */
+
+.features {
+  background: linear-gradient(160deg, #f8fffe 0%, #f0fdfa 40%, #e8f9ff 100%);
+  padding: var(--space-24) var(--space-10);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient background blobs */
+.features::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.features::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Title Section ── */
+.titleBlock {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--space-16);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.titleBlock.inView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-bottom: var(--space-4);
+}
+.labelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 900;
+  color: var(--color-dark-blue);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-5);
+}
+
+/* Teal highlight for key word */
+.titleAccent {
+  color: var(--color-deep-teal);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 1.06rem;
+  line-height: 1.78;
+  color: var(--color-slate-600);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ── Feature Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* ── Feature Card ── */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid rgba(6, 182, 212, 0.18);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+
+  /* scroll reveal */
+  opacity: 0;
+  transform: translateY(28px);
+}
+.card.inView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle inner glow on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.06) 0%, rgba(20, 184, 166, 0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 56px rgba(6, 182, 212, 0.18);
+  border-color: rgba(6, 182, 212, 0.45);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Staggered delays */
+.card:nth-child(1) { transition-delay: 0s; }
+.card:nth-child(2) { transition-delay: 0.08s; }
+.card:nth-child(3) { transition-delay: 0.16s; }
+.card:nth-child(4) { transition-delay: 0.24s; }
+.card:nth-child(5) { transition-delay: 0.32s; }
+.card:nth-child(6) { transition-delay: 0.4s; }
+
+/* ── Icon Box ── */
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Each card gets its own icon gradient — applied via inline style */
+
+/* ── Card Text ── */
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--color-deep-teal);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.cardDesc {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--color-slate-600);
+  flex: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .features {
+    padding: var(--space-16) var(--space-6);
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 600px) {
+  .features {
+    padding: var(--space-12) var(--space-4);
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+}
