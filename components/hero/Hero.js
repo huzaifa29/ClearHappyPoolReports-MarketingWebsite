@@ -62,8 +62,8 @@ export default function Hero() {
 
           {/* Hero image */}
           <Image
-            src="/images/hero-pool.jpg"
-            alt="Crystal clear pool — Clear & Happy Pool Reports"
+            src="/images/web-mob.png"
+            alt="Clear & Happy Pool Reports — Web Dashboard & Mobile App"
             width={620}
             height={430}
             className={styles.heroImage}
