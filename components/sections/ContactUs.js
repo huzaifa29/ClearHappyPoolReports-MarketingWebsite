@@ -100,10 +100,7 @@ export default function ContactUs() {
               className={styles.contactImage}
               priority
             />
-            <div className={styles.imageBadge}>
-              <span className={styles.badgeDot} />
-              <span className={styles.badgeText}>We reply within 24 hours</span>
-            </div>
+
           </div>
 
           {/* Right — form */}
@@ -111,14 +108,7 @@ export default function ContactUs() {
             <h3 className={styles.formTitle}>Send us a message</h3>
             <p className={styles.formSubtitle}>Fill in the form below and we&apos;ll get back to you shortly.</p>
 
-            {sent && (
-              <div className={styles.successBanner}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                Your message has been sent! We&apos;ll be in touch soon.
-              </div>
-            )}
+
 
             <form onSubmit={handleSubmit} noValidate>
               <div className={styles.formGrid}>
