@@ -195,10 +195,11 @@
 
 .heroImage {
   width: 100%;
-  height: 430px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-xl);
   box-shadow: 0 28px 72px rgba(14, 116, 144, 0.2);
+  background: transparent;
 }
 
 /* Floating stat card */
@@ -285,7 +286,7 @@
     order: -1;
   }
   .heroImage {
-    height: 300px;
+    height: auto;
   }
   .statCard {
     right: var(--space-2);
@@ -301,7 +302,7 @@
     font-size: 1.9rem;
   }
   .heroImage {
-    height: 240px;
+    height: auto;
   }
   .btnPrimary,
   .btnOutline {

@@ -64,8 +64,8 @@ export default function Hero() {
           <Image
             src="/images/web-mob.png"
             alt="Clear & Happy Pool Reports — Web Dashboard & Mobile App"
-            width={620}
-            height={430}
+            width={1600}
+            height={900}
             className={styles.heroImage}
             priority
           />
