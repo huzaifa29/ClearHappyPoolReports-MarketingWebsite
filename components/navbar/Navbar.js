@@ -1,33 +1,86 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
-  { label: 'Home',       href: '#home' },
-  { label: 'About Us',   href: '#about' },
-  { label: 'Features',   href: '#features' },
-  { label: 'Our Mission', href: '#mission' },
-  { label: 'Pricing',    href: '#pricing' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Home',        href: '#home'     },
+  { label: 'About Us',    href: '#about'    },
+  { label: 'Features',    href: '#features' },
+  { label: 'Our Mission', href: '#mission'  },
+  { label: 'Pricing',     href: '#pricing'  },
+  { label: 'Contact Us',  href: '#contact'  },
 ];
 
+// Section ids in page order — must match the id= attributes on each section
+const SECTION_IDS = ['home', 'about', 'features', 'mission', 'pricing', 'contact'];
+
 export default function Navbar() {
-  const [scrolled,        setScrolled]        = useState(false);
-  const [activeLink,      setActiveLink]      = useState('Home');
-  const [mobileMenuOpen,  setMobileMenuOpen]  = useState(false);
+  const [scrolled,       setScrolled]       = useState(false);
+  const [activeLink,     setActiveLink]     = useState('Home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Track whether the user just clicked a link so we don't fight the scroll observer
+  const clickedRef = useRef(false);
+  const clickTimerRef = useRef(null);
 
   useEffect(() => {
+    // ── Scroll shadow ──────────────────────────────────────
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    // ── IntersectionObserver — highlight nav based on section in view ──
+    const observers = [];
+
+    const activate = (label) => {
+      // Don't override while user is still scrolling after a click
+      if (clickedRef.current) return;
+      setActiveLink(label);
+    };
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const label = NAV_LINKS.find((l) => l.href === `#${id}`)?.label;
+      if (!label) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) activate(label);
+        },
+        {
+          // Fire when section top crosses into the upper 25% of the viewport
+          rootMargin: '-10% 0px -70% 0px',
+          threshold: 0,
+        }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      observers.forEach((o) => o.disconnect());
+      if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+    };
   }, []);
 
   const handleNavClick = (label) => {
+    // Immediately set active on click for snappy feel
     setActiveLink(label);
     setMobileMenuOpen(false);
+
+    // Suppress observer for ~800ms so the smooth-scroll animation
+    // doesn't flicker through intermediate sections
+    clickedRef.current = true;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+    clickTimerRef.current = setTimeout(() => {
+      clickedRef.current = false;
+    }, 800);
   };
 
   return (
@@ -45,7 +98,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Center — Nav Links */}
+        {/* Centre — Nav Links */}
         <ul className={styles.navLinks}>
           {NAV_LINKS.map(({ label, href }) => (
             <li key={label}>
