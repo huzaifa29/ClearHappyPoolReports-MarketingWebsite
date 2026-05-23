@@ -77,7 +77,7 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
-            © 2026 Clear &amp; Happy Pool Resorts. All rights reserved.
+            © 2026 Clear &amp; Happy Pool Reports. All rights reserved.
           </p>
 
           {/* Social icons */}
