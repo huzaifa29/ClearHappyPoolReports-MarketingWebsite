@@ -51,7 +51,7 @@ const FEATURES = [
   },
   {
     title: 'Accounting Software Integration',
-    desc: 'Integrates with QuickBooks and Oracle at no extra charge for seamless billing and accounting.',
+    desc: 'Integrates with QuickBooks at no extra charge for seamless billing and accounting.',
     iconBg: 'linear-gradient(135deg, #fb923c, #ea580c)',   // orange
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
