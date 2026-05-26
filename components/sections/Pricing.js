@@ -17,18 +17,18 @@ function useReveal(selector) {
 }
 
 const FEATURES = [
-  'Route optimization',
-  'Job scheduling',
-  'Client & pool management',
-  'QuickBooks software integration (subscription with QuickBooks required)',
-  'Pool service reports with photos & video',
-  'Pool repair service reports with photos & video',
-  'Broadcast Emails',
-  'Detailed reporting & service history',
-  'Unlimited admins',
-  'In-app team communication',
-  'In-app smart prompt to text or call client before arrival',
-  'Easy one-time employee app login capability',
+  { icon: '🗺️', label: 'Route optimization' },
+  { icon: '📅', label: 'Job scheduling' },
+  { icon: '👥', label: 'Client & pool management' },
+  { icon: '💼', label: 'QuickBooks software integration (subscription with QuickBooks required)' },
+  { icon: '📸', label: 'Pool service reports with photos & video' },
+  { icon: '🔧', label: 'Pool repair service reports with photos & video' },
+  { icon: '📧', label: 'Broadcast Emails' },
+  { icon: '📊', label: 'Detailed reporting & service history' },
+  { icon: '♾️', label: 'Unlimited admins' },
+  { icon: '💬', label: 'In-app team communication' },
+  { icon: '📲', label: 'In-app smart prompt to text or call client before arrival' },
+  { icon: '🔑', label: 'Easy one-time employee app login capability' },
 ];
 
 const PLANS = [
@@ -84,6 +84,8 @@ const PLANS = [
 export default function Pricing() {
   useReveal('.js-pricing-title');
   useReveal('.js-pricing-card');
+  useReveal('.js-features-header');
+  useReveal('.js-feature-item');
 
   return (
     <section id="pricing" className={styles.pricing}>
@@ -99,7 +101,7 @@ export default function Pricing() {
             Choose From Our Lowest<br />Plans and Prices
           </h2>
           <p className={styles.subtitle}>
-            No hidden fees. No long-term contracts. All plans include every feature —
+            No hidden fees. No long-term contracts. Every plan includes all features —
             the only difference is the number of technicians.
           </p>
         </div>
@@ -112,15 +114,12 @@ export default function Pricing() {
               className={`${styles.card} ${plan.featured ? styles.featured : ''} js-pricing-card`}
               style={{ transitionDelay: `${i * 0.08}s` }}
             >
-              {/* Badge */}
               {plan.badge && (
                 <div className={styles.featuredBadge}>{plan.badge}</div>
               )}
 
-              {/* Plan name */}
               <h3 className={styles.planName}>{plan.name}</h3>
 
-              {/* Price */}
               <div className={styles.priceWrap}>
                 {plan.price === 'Custom' ? (
                   <div className={styles.customPrice}>
@@ -135,9 +134,8 @@ export default function Pricing() {
                 )}
               </div>
 
-              {/* Technicians tag */}
               <div className={styles.techTag}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                   <circle cx="9" cy="7" r="4"/>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -146,27 +144,8 @@ export default function Pricing() {
                 {plan.technicians}
               </div>
 
-              {plan.note && (
-                <p className={styles.planNote}>{plan.note}</p>
-              )}
+              {plan.note && <p className={styles.planNote}>{plan.note}</p>}
 
-              <div className={styles.divider} />
-
-              {/* Feature list */}
-              <ul className={styles.featureList}>
-                {FEATURES.map((feat, fi) => (
-                  <li key={fi} className={styles.featureItem}>
-                    <span className={styles.checkIcon}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                    </span>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
               <Link
                 href={plan.ctaHref}
                 className={`${styles.ctaBtn} ${plan.featured ? styles.ctaBtnFilled : styles.ctaBtnOutline}`}
@@ -175,6 +154,33 @@ export default function Pricing() {
               </Link>
             </div>
           ))}
+        </div>
+
+        {/* ══════════════════════════════════════
+            ALL PLANS INCLUDE — Features section
+        ══════════════════════════════════════ */}
+        <div className={`${styles.featuresSection} js-features-header`}>
+          <div className={styles.featuresHeader}>
+            <div className={styles.featuresHeaderLine} />
+            <div className={styles.featuresHeaderText}>
+              <span className={styles.featuresHeaderLabel}>All Plans Include</span>
+              <p className={styles.featuresHeaderSub}>Every feature, every plan — no upsells.</p>
+            </div>
+            <div className={styles.featuresHeaderLine} />
+          </div>
+
+          <div className={styles.featuresGrid}>
+            {FEATURES.map((feat, i) => (
+              <div
+                key={i}
+                className={`${styles.featureCard} js-feature-item`}
+                style={{ transitionDelay: `${i * 0.05}s` }}
+              >
+                <span className={styles.featureEmoji}>{feat.icon}</span>
+                <span className={styles.featureLabel}>{feat.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
