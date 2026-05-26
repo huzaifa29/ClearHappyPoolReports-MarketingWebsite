@@ -106,6 +106,33 @@ export default function Pricing() {
           </p>
         </div>
 
+        {/* ══════════════════════════════════════
+            ALL PLANS INCLUDE — Features section
+        ══════════════════════════════════════ */}
+        <div className={styles.featuresSection + " js-features-header"}>
+          <div className={styles.featuresHeader}>
+            <div className={styles.featuresHeaderLine} />
+            <div className={styles.featuresHeaderText}>
+              <span className={styles.featuresHeaderLabel}>All Plans Include</span>
+              <p className={styles.featuresHeaderSub}>Every feature, every plan — no upsells.</p>
+            </div>
+            <div className={styles.featuresHeaderLine} />
+          </div>
+
+          <div className={styles.featuresGrid}>
+            {FEATURES.map((feat, i) => (
+              <div
+                key={i}
+                className={styles.featureCard + " js-feature-item"}
+                style={{ transitionDelay: `${i * 0.05}s` }}
+              >
+                <span className={styles.featureEmoji}>{feat.icon}</span>
+                <span className={styles.featureLabel}>{feat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ── Plans grid ── */}
         <div className={styles.plansGrid}>
           {PLANS.map((plan, i) => (
@@ -156,32 +183,7 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* ══════════════════════════════════════
-            ALL PLANS INCLUDE — Features section
-        ══════════════════════════════════════ */}
-        <div className={`${styles.featuresSection} js-features-header`}>
-          <div className={styles.featuresHeader}>
-            <div className={styles.featuresHeaderLine} />
-            <div className={styles.featuresHeaderText}>
-              <span className={styles.featuresHeaderLabel}>All Plans Include</span>
-              <p className={styles.featuresHeaderSub}>Every feature, every plan — no upsells.</p>
-            </div>
-            <div className={styles.featuresHeaderLine} />
-          </div>
 
-          <div className={styles.featuresGrid}>
-            {FEATURES.map((feat, i) => (
-              <div
-                key={i}
-                className={`${styles.featureCard} js-feature-item`}
-                style={{ transitionDelay: `${i * 0.05}s` }}
-              >
-                <span className={styles.featureEmoji}>{feat.icon}</span>
-                <span className={styles.featureLabel}>{feat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
       </div>
     </section>

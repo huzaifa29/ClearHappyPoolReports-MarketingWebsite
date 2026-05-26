@@ -85,7 +85,6 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   align-items: end;         /* cards align at bottom so featured stands taller naturally */
-  margin-bottom: var(--space-16);
   padding-top: 1.5rem;      /* room for the overhanging Most Popular badge */
 }
 
@@ -279,6 +278,7 @@
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  margin-bottom: var(--space-16);
 }
 .featuresSection.inView { opacity: 1; transform: translateY(0); }
 
