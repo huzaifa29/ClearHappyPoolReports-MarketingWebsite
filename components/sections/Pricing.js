@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import styles from './Pricing.module.css';
 
 function useReveal(selector) {
@@ -8,42 +9,75 @@ function useReveal(selector) {
     const els = document.querySelectorAll(selector);
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add(styles.inView)),
-      { threshold: 0.12 }
+      { threshold: 0.08 }
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [selector]);
 }
 
+const FEATURES = [
+  'Route optimization',
+  'Job scheduling',
+  'Client & pool management',
+  'QuickBooks software integration (subscription with QuickBooks required)',
+  'Pool service reports with photos & video',
+  'Pool repair service reports with photos & video',
+  'Broadcast Emails',
+  'Detailed reporting & service history',
+  'Unlimited admins',
+  'In-app team communication',
+  'In-app smart prompt to text or call client before arrival',
+  'Easy one-time employee app login capability',
+];
+
 const PLANS = [
   {
-    name: 'Core',
-    price: '49',
-    subtitle: 'Best for small pool service businesses',
+    name: 'Current',
+    price: '$59.99',
+    period: '/Month',
+    technicians: '1 Technician',
     featured: false,
-    features: [
-      'Limited number of pools or technicians',
-      'Client & pool management',
-      'Scheduling & basic routing',
-      'Pool service reports with photos',
-      'Team communication',
-      'Monthly subscription only',
-    ],
+    cta: 'Book Now',
+    ctaHref: '#contact',
   },
   {
-    name: 'Plus',
-    price: '99',
-    subtitle: 'Ideal for growing pool service companies',
+    name: 'Flow',
+    price: '$99.99',
+    period: '/Month',
+    technicians: '3 Technicians',
     featured: true,
-    features: [
-      'Higher number of pools or technicians',
-      'Includes everything in Basic Plan',
-      'Advanced scheduling & route optimization',
-      'Accounting software integration (QuickBooks)',
-      'Detailed reporting & service history',
-      'Priority support',
-      'Monthly subscription only',
-    ],
+    badge: '★ Most Popular',
+    cta: 'Book Now',
+    ctaHref: '#contact',
+  },
+  {
+    name: 'Cascade',
+    price: '$159.99',
+    period: '/Month',
+    technicians: '6 Technicians',
+    featured: false,
+    cta: 'Book Now',
+    ctaHref: '#contact',
+  },
+  {
+    name: 'Deep End',
+    price: '$219.99',
+    period: '/Month',
+    technicians: '10 Technicians',
+    featured: false,
+    cta: 'Book Now',
+    ctaHref: '#contact',
+  },
+  {
+    name: 'Infinity',
+    price: 'Custom',
+    period: '',
+    technicians: '10+ Technicians',
+    featured: false,
+    note: 'Contact us for custom pricing',
+    cta: 'Contact Us',
+    ctaHref: '#contact',
   },
 ];
 
@@ -65,58 +99,80 @@ export default function Pricing() {
             Choose From Our Lowest<br />Plans and Prices
           </h2>
           <p className={styles.subtitle}>
-            No hidden fees. No long-term contracts. Just straightforward
-            pricing built for pool service professionals.
+            No hidden fees. No long-term contracts. All plans include every feature —
+            the only difference is the number of technicians.
           </p>
         </div>
 
-        {/* ── Plans ── */}
+        {/* ── Plans grid ── */}
         <div className={styles.plansGrid}>
-          {PLANS.map((plan) => (
+          {PLANS.map((plan, i) => (
             <div
               key={plan.name}
               className={`${styles.card} ${plan.featured ? styles.featured : ''} js-pricing-card`}
+              style={{ transitionDelay: `${i * 0.08}s` }}
             >
-              {/* Header */}
-              <div className={styles.cardHeader}>
-                {plan.featured && (
-                  <div className={styles.featuredBadge}>
-                    <span className={styles.badgeStar}>★</span>
-                    Most Popular
+              {/* Badge */}
+              {plan.badge && (
+                <div className={styles.featuredBadge}>{plan.badge}</div>
+              )}
+
+              {/* Plan name */}
+              <h3 className={styles.planName}>{plan.name}</h3>
+
+              {/* Price */}
+              <div className={styles.priceWrap}>
+                {plan.price === 'Custom' ? (
+                  <div className={styles.customPrice}>
+                    <span className={styles.customLabel}>Custom Pricing</span>
+                  </div>
+                ) : (
+                  <div className={styles.pricePill}>
+                    <span className={styles.currencySign}>$</span>
+                    <span className={styles.priceAmount}>{plan.price.replace('$', '')}</span>
+                    <span className={styles.pricePeriod}>{plan.period}</span>
                   </div>
                 )}
-
-                <h3 className={styles.planName}>{plan.name} Plan</h3>
-
-                {/* Price pill */}
-                <div className={styles.pricePill}>
-                  <span className={styles.currencySign}>$</span>
-                  <span className={styles.priceAmount}>{plan.price}</span>
-                  <span className={styles.pricePeriod}>/Month</span>
-                </div>
               </div>
 
-              {/* Subtitle */}
-              <p className={styles.planSubtitle}>{plan.subtitle}</p>
+              {/* Technicians tag */}
+              <div className={styles.techTag}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                {plan.technicians}
+              </div>
+
+              {plan.note && (
+                <p className={styles.planNote}>{plan.note}</p>
+              )}
+
               <div className={styles.divider} />
 
-              {/* Features */}
+              {/* Feature list */}
               <ul className={styles.featureList}>
-                {plan.features.map((feat, i) => (
-                  <li key={i} className={styles.featureItem}>
-                    <span className={styles.featureDot} />
+                {FEATURES.map((feat, fi) => (
+                  <li key={fi} className={styles.featureItem}>
+                    <span className={styles.checkIcon}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </span>
                     {feat}
                   </li>
                 ))}
               </ul>
 
               {/* CTA */}
-              <a
-                href="#contact"
+              <Link
+                href={plan.ctaHref}
                 className={`${styles.ctaBtn} ${plan.featured ? styles.ctaBtnFilled : styles.ctaBtnOutline}`}
               >
-                Book Now
-              </a>
+                {plan.cta}
+              </Link>
             </div>
           ))}
         </div>
