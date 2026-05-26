@@ -84,8 +84,9 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
-  align-items: stretch;
+  align-items: end;         /* cards align at bottom so featured stands taller naturally */
   margin-bottom: var(--space-16);
+  padding-top: 1.5rem;      /* room for the overhanging Most Popular badge */
 }
 
 /* ── Plan Card ── */
@@ -100,7 +101,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
   opacity: 0;
   transform: translateY(28px);
@@ -127,21 +128,27 @@
   background: rgba(255,255,255,0.92);
   border: 2px solid rgba(6,182,212,0.55);
   box-shadow: 0 8px 40px rgba(6,182,212,0.15);
+  margin-top: -2rem;   /* pull card up so badge overhangs nicely */
+  padding-top: 2.5rem; /* compensate inner spacing */
+  z-index: 2;
 }
 
 .featuredBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.26rem 0.75rem;
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 0.38rem 1.1rem;
   border-radius: 999px;
   background: var(--gradient-brand);
   font-family: var(--font-heading);
-  font-size: 0.63rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #fff;
-  align-self: flex-start;
+  box-shadow: 0 4px 16px rgba(6,182,212,0.4);
 }
 
 .planName {
@@ -159,51 +166,52 @@
   display: inline-flex;
   align-items: baseline;
   gap: 0.15rem;
-  background: var(--gradient-brand);
-  border-radius: 12px;
-  padding: 0.65rem 1.1rem;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .currencySign {
   font-family: var(--font-heading);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.9);
+  color: var(--color-dark-blue);
   align-self: flex-start;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 .priceAmount {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 900;
-  color: #fff;
+  color: var(--color-dark-blue);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 .pricePeriod {
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.85);
+  font-size: 0.8rem;
+  color: var(--color-slate-500);
   align-self: flex-end;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .customPrice {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: var(--gradient-brand);
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
+  justify-content: flex-start;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   width: 100%;
 }
 .customLabel {
   font-family: var(--font-heading);
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  color: #fff;
-  text-align: center;
+  color: var(--color-dark-blue);
+  text-align: left;
+  line-height: 1.3;
 }
 
 .techTag {
