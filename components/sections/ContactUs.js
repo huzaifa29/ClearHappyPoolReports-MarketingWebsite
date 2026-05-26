@@ -164,8 +164,11 @@ export default function ContactUs() {
                     name="interest" value={form.interest} onChange={handleChange}
                   >
                     <option value="">Select an option...</option>
-                    <option value="Core Plan - $49/Month">Core Plan — $49/Month</option>
-                    <option value="Plus Plan - $99/Month">Plus Plan — $99/Month</option>
+                    <option value="Current Plan - $59.99/Month">Current Plan — $59.99/Month</option>
+                    <option value="Flow Plan - $99.99/Month">Flow Plan — $99.99/Month</option>
+                    <option value="Cascade Plan - $159.99/Month">Cascade Plan — $159.99/Month</option>
+                    <option value="Deep End Plan - $219.99/Month">Deep End Plan — $219.99/Month</option>
+                    <option value="Infinity Plan - Custom Pricing">Infinity Plan — Custom Pricing</option>
                     <option value="General Inquiry">General Inquiry</option>
                   </select>
                   {errors.interest && <span className={styles.errorMsg}>{errors.interest}</span>}
