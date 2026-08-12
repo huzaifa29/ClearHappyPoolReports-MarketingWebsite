@@ -148,7 +148,7 @@ export default function Navbar() {
         ))}
         <div className={styles.mobileActions}>
           <button className={styles.signIn}>Sign In</button>
-          <Link href="#" className={styles.ctaButton}>Start Free Trial →</Link>
+          <Link href="https://dashboard.clearandhappypoolreports.com/login" className={styles.ctaButton}>Start Free Trial →</Link>
         </div>
       </div>
     </>
