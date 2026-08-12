@@ -39,7 +39,7 @@ export default function Hero() {
           </p>
 
           <div className={`${styles.actions} ${visible ? styles.visible : ''}`}>
-            <Link href="#" className={styles.btnPrimary}>
+            <Link href="https://dashboard.clearandhappypoolreports.com/login" className={styles.btnPrimary}>
               Start Free Trial &nbsp;→
             </Link>
             <Link href="#" className={styles.btnOutline}>
